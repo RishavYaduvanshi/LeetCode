@@ -1,12 +1,11 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        int n=intervals.size();
+        
         vector<vector<int>>ans;
         sort(intervals.begin(),intervals.end());
-    
         vector<int>temp=intervals[0];
-        for(int i=1;i<n;i++)
+        for(int i=1;i<intervals.size();i++)
         {
             if(temp[1]>=intervals[i][0])
             {
