@@ -3,50 +3,43 @@ public:
     bool isValid(string s) {
         
         stack<char>st;
-        
-        char x;
-        int n=s.size();
-        
+        int n = s.size();
         for(int i=0;i<n;i++)
         {
-            if(s[i]=='(' or s[i]=='{' or s[i]=='[')
-            {   
+            if(s[i]=='[' or s[i]=='(' or s[i]=='{' )
+            {
                 st.push(s[i]);
                 continue;
-            }
+            } 
             if(st.empty())
                 return false;
-            
-            switch(s[i])
+            else
             {
-                case ')':
-                    x=st.top();
-                    if(x=='(')
-                        st.pop();
-                    else
-                        return false;
-                    break;
-                case ']':
-                    x=st.top();
-                    if(x=='[')
-                        st.pop();
-                    else
-                        return false;
-                    break;
-                case '}':
-                    x=st.top();
-                    if(x=='{')
-                        st.pop();
-                    else
-                        return false;
-                    break;
+                char t = st.top();
+                
+                switch(t)
+                {
+                    case '(':   if(s[i]!=')')
+                                    return false;
+                                else
+                                    break;
+                                    
+                    case '[':   if(s[i]!=']')
+                                    return false;
+                                else
+                                    break;
+                    case '{':   if(s[i]!='}')
+                                    return false;
+                                else
+                                    break;
+                }
+                st.pop();
             }
-            
+           
         }
         if(st.empty())
-            return true;
+        return true;
         else 
             return false;
-        
     }
 };
