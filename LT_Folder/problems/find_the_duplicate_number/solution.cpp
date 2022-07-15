@@ -1,14 +1,11 @@
 class Solution {
 public:
-    int findDuplicate(vector<int>& a) {
+    int findDuplicate(vector<int>& nums) {
         
-        for (int i = 0; i <= a.size(); i++)
-        {
-            if (a[0] == a[a[0]])
-            {
-                return a[0];
-            }
-            swap(a[0], a[a[0]]);
+        for(int i=0; i < nums.size(); i++){
+            if(nums[0] == nums[nums[0]])
+                return nums[0];
+            swap(nums[0], nums[nums[0]]);
         }
         return 0;
     }
