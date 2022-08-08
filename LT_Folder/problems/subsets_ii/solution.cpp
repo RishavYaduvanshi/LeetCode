@@ -1,32 +1,26 @@
 class Solution {
 
 private:
-    void subSet(vector<int> inp,vector<int> op, set<vector<int>> &ans){
+    void subSet(vector<int> inp,int ind,vector<int> ds, vector<vector<int>> &ans){
+        ans.push_back(ds);
         
-        if(inp.size() == 0){
-            sort(op.begin(), op.end());
-            ans.insert(op);
-            return;
+        for(int i = ind;i < inp.size();i++){
+            if(i != ind and inp[i] == inp[i-1])
+                continue;
+            ds.push_back(inp[i]);
+            subSet(inp,i+1,ds,ans);
+            ds.pop_back();
         }
-        vector<int> op1 = op;
-        vector<int> op2 = op;
-        op2.push_back(inp[0]);
-        inp.erase(inp.begin() + 0);
-        subSet(inp,op1,ans);
-        subSet(inp,op2,ans);
+       
         
     }
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
-        vector<vector<int>> res;
-        set<vector<int>> ans;
-        vector<int> op;
-        
-        subSet(nums, op, ans);
-        
-        for(auto i :ans)
-            res.push_back(i);
-        return res;
+        vector<vector<int>> ans;
+        vector<int> ds;
+        sort(nums.begin(),nums.end());
+        subSet(nums,0, ds, ans);
+        return ans;
     }
 };
